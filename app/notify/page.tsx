@@ -12,10 +12,7 @@ import { ArrowLeft, CheckCircle, Sparkles, Users, Globe } from "lucide-react"
 import Link from "next/link"
 
 const notifyTexts = [
-  "Be the first to fund students.",
-  "Get exclusive early access.",
-  "Join the education revolution.",
-  "Transform lives through blockchain.",
+  "Choose Students to Support.",
 ]
 
 const benefits = [
@@ -194,9 +191,7 @@ export default function NotifyPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
             >
-              We're building the ultimate platform for transparent education funding. Soon, you'll browse verified
-              students, filter by field or university, and fund directly with blockchain technology—no middlemen, just
-              pure impact.
+              Medici is currently curating verified student profiles and setting up funding flows. If you're interested in becoming an early donor, leave your name and email and we'll reach out as soon as we're ready to launch.
             </motion.p>
           </motion.div>
 
@@ -241,7 +236,7 @@ export default function NotifyPage() {
                   <CardContent className="p-8">
                     <div className="text-center mb-6">
                       <h2 className="text-2xl font-bold mb-2">Get Early Access</h2>
-                      <p className="text-muted-foreground">Join the waitlist for exclusive early access</p>
+                      <p className="text-muted-foreground"></p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -302,7 +297,7 @@ export default function NotifyPage() {
                               className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
                             />
                           ) : (
-                            "Notify Me When Live"
+                            "Notify Me"
                           )}
                         </Button>
                       </motion.div>

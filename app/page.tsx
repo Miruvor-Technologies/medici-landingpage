@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion"
+import { motion, useInView, useScroll, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
@@ -12,23 +12,23 @@ import Link from "next/link"
 const features = [
   {
     icon: Users,
-    title: "Direct Connection",
+    title: "You Choose",
     description:
-      "Connect directly with verified students worldwide. No intermediaries, no hidden fees, just pure impact.",
+      "Whether you care about nurses, artists or engineers, you choose who to support. Medici lets you fund verified students directly and transparently.",
     gradient: "from-blue-500 via-purple-500 to-pink-500",
   },
   {
     icon: Shield,
-    title: "Blockchain Transparency",
+    title: "Fully Transparent",
     description:
-      "Every transaction is recorded on-chain. Track your donations in real-time with complete transparency.",
+      "Every transfer is public and traceable on the blockchain. No donor sign-ups required and our code is open-source for anyone to audit.",
     gradient: "from-green-500 via-teal-500 to-blue-500",
   },
   {
     icon: GraduationCap,
     title: "Verified Students",
     description:
-      "All students undergo rigorous verification. Academic records, enrollment status, and identity confirmed.",
+      "We check enrollment documents, IDs and do live-video interviews. Linked public profiles give you confidence each student is real.",
     gradient: "from-orange-500 via-red-500 to-pink-500",
   },
 ]
@@ -66,41 +66,43 @@ const howItWorksSteps = [
 
 const faqs = [
   {
-    question: "How do I verify my donation reaches the student?",
+    question: "How can I verify that the student received my donation?",
     answer:
-      "Every transaction is recorded on the blockchain with complete transparency. You receive a transaction hash that you can verify on any blockchain explorer, showing the exact path from your wallet to the student's wallet.",
+      "When you complete a transaction, you'll receive a transaction reference or hash. While we notify you of the transaction status, you don't need to take our word for it. Use the hash to independently verify the transaction on any public blockchain explorer.",
   },
   {
     question: "What fees does Medici charge?",
     answer:
-      "Medici charges zero platform fees. You only pay standard blockchain network fees, which are typically under $5. 100% of your donation goes directly to the student.",
+      "Medici charges a small fee per transaction to support platform development. However, during our early access phase, all platform fees are waived. You'll only pay the standard blockchain network fee.",
   },
   {
-    question: "Can I donate without cryptocurrency knowledge?",
+    question: "Can I donate if I'm not familiar with cryptocurrencies?",
     answer:
-      "While our current system uses blockchain for transparency, we're developing user-friendly interfaces that make crypto donations as simple as traditional payments. Detailed guides are provided for new users.",
+      "You'll need a crypto wallet with funds to complete a donation. If you're new to crypto, our team can share resources and guide you through setting up a wallet and adding funds.",
   },
   {
-    question: "How rigorous is the student verification process?",
+    question: "Will I receive updates about the student I support?",
     answer:
-      "Students must provide official enrollment verification, academic transcripts, government-issued ID, and undergo video interviews. Our verification team manually reviews each application with a 99.2% accuracy rate.",
+      "We encourage students to share updates on how they use the funds they receive. If you'd like to stay informed, sign up with your email after you complete a transaction to receive occasional, non-spammy updates about their progress. We're also working on features that improve accountability and traceability over time.",
   },
   {
-    question: "Will I receive updates on my funded student?",
+    question: "Are donations made through Medici tax-deductible?",
     answer:
-      "Yes! Students provide quarterly progress reports including grades, achievements, and personal updates. You'll also receive notifications for major milestones like graduation or academic honors.",
+      "Donations made through Medici are currently not tax-deductible. We are exploring partnerships and paths to enable this in the future.",
   },
-]
-
-const heroTexts = [
-  "Fund education directly.",
-  "Transform lives globally.",
-  "Invest in tomorrow's leaders.",
-  "Create lasting impact.",
+  {
+    question: "Can I support students outside the US?",
+    answer:
+      "Medici is currently available to US citizens and international students who are enrolled or expected to enroll at a US institution. We're actively working on expanding access to students globally.",
+  },
+  {
+    question: "What blockchain does Medici operate on?",
+    answer:
+      "Medici runs on the Solana blockchain and supports USDC (a stablecoin pegged to the US dollar) for all transactions.",
+  },
 ]
 
 export default function HomePage() {
-  const [currentHeroText, setCurrentHeroText] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const howItWorksRef = useRef(null)
   const featuresRef = useRef(null)
@@ -116,13 +118,6 @@ export default function HomePage() {
 
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentHeroText((prev) => (prev + 1) % heroTexts.length)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [])
 
   return (
     <div className="min-h-screen bg-background">
@@ -190,21 +185,17 @@ export default function HomePage() {
             className="max-w-5xl mx-auto"
           >
             <div className="mb-8">
-              <AnimatePresence mode="wait">
-                <motion.h1
-                  key={currentHeroText}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4"
-                >
-                  {heroTexts[currentHeroText]}{" "}
-                  <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    Transparent. On-chain.
-                  </span>
-                </motion.h1>
-              </AnimatePresence>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4"
+              >
+                Fund a Student's Future.{" "}
+                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Direct. Instant. Transparent.
+                </span>
+              </motion.h1>
             </div>
 
             <motion.p
@@ -213,8 +204,8 @@ export default function HomePage() {
               transition={{ duration: 1, delay: 0.2 }}
               className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed"
             >
-              Connect directly with verified students worldwide. Every transaction is transparent, secure, and recorded
-              on the blockchain. No middlemen, no hidden fees—just pure educational impact.
+              Browse real student profiles. Filter by field, university or background. <br />
+              Send any amount. Securely, peer-to-peer, via the blockchain.
             </motion.p>
 
             <motion.div
@@ -229,7 +220,7 @@ export default function HomePage() {
                   variant="outline"
                   className="px-8 py-4 text-lg rounded-full border-2 hover:bg-muted/50 transition-all duration-300"
                 >
-                  Notify Me
+                  Get Early Access
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
@@ -304,7 +295,7 @@ export default function HomePage() {
                 className="text-5xl md:text-6xl font-bold mb-6"
               >
                 <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Why Choose Medici
+                  Why Medici
                 </span>
               </motion.h2>
 
@@ -315,7 +306,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="text-xl md:text-2xl text-muted-foreground/80 max-w-3xl mx-auto leading-relaxed"
               >
-                Revolutionary blockchain technology meets educational funding
+                Educational funding is broken. We're using the blockchain to fix it.
               </motion.p>
             </div>
           </motion.div>
@@ -405,7 +396,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="text-xl md:text-2xl text-muted-foreground/80 max-w-3xl mx-auto leading-relaxed"
               >
-                Four simple steps to transform education funding through blockchain technology
+                 
               </motion.p>
             </div>
           </motion.div>
@@ -422,15 +413,13 @@ export default function HomePage() {
                   className="text-left space-y-6"
                 >
                   <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    Transforming Education Funding
+                    Back a Student in a Few Clicks
                   </h3>
                   <p className="text-lg text-muted-foreground leading-relaxed">
-                    Our platform connects students directly with donors through blockchain technology, ensuring complete transparency 
-                    and trust. Every transaction is recorded on-chain, allowing real-time tracking of your impact.
+                    Browse through student profiles and choose someone you want to fund. Click "Back This Student", enter your preferred amount and approve the transaction through your crypto wallet.
                   </p>
                   <p className="text-lg text-muted-foreground leading-relaxed">
-                    Students undergo thorough verification, including academic records, enrollment status, and identity confirmation. 
-                    This creates a secure and trustworthy environment for meaningful educational support.
+                    Funds reach the student's wallet instantly, all recorded on the blockchain. No logins. No intermediaries. Secure and traceable.
                   </p>
                 </motion.div>
 
@@ -470,7 +459,7 @@ export default function HomePage() {
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
             <p className="text-xl text-muted-foreground">
-              Everything you need to know about Medici and blockchain-powered education funding
+              Everything you need to know about Medici
             </p>
           </motion.div>
 
@@ -524,8 +513,7 @@ export default function HomePage() {
                 </span>
               </div>
               <p className="text-muted-foreground leading-relaxed max-w-md">
-                Democratizing education funding through blockchain technology. Connecting students directly with donors
-                worldwide for transparent, secure educational support.
+                A peer-to-peer platform where donors browse verified student profiles and fund their education using USDC on the Solana blockchain.
               </p>
             </div>
 
@@ -554,7 +542,7 @@ export default function HomePage() {
               <h4 className="font-semibold mb-6 text-lg">Connect</h4>
               <div className="space-y-3">
                 <a
-                  href="https://x.com/Scholar_Sphere_"
+                  href="https://x.com/Medici_ac"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
@@ -563,7 +551,7 @@ export default function HomePage() {
                   <span>Twitter</span>
                 </a>
                 <a
-                  href="mailto:contact@medici.com"
+                  href="mailto:rd@stableresearch.xyz"
                   className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <Mail className="h-4 w-4" />
@@ -575,8 +563,7 @@ export default function HomePage() {
 
           <div className="border-t border-border/50 mt-12 pt-8 text-center text-muted-foreground">
             <p>
-              &copy; {new Date().getFullYear()} Medici. All rights reserved. Empowering education through blockchain
-              innovation.
+              &copy; {new Date().getFullYear()} Medici. All rights reserved. Funding human potential through the blockchain.
             </p>
           </div>
         </div>

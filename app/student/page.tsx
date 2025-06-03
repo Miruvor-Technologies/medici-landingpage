@@ -14,10 +14,7 @@ import Link from "next/link"
 import { useDebounce } from "@/hooks/use-debounce"
 
 const studentTexts = [
-  "Get discovered by donors worldwide.",
-  "Secure funding for your education.",
-  "Join the blockchain revolution.",
-  "Transform your academic future.",
+  "Get Help Paying for College",
 ]
 
 const advantages = [
@@ -190,7 +187,7 @@ export default function StudentPage() {
             transition={{ delay: 0.5 }}
             className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
           >
-            Application Submitted Successfully!
+            Thanks for Requesting an Invite!
           </motion.h1>
 
           <motion.p
@@ -199,9 +196,7 @@ export default function StudentPage() {
             transition={{ delay: 0.7 }}
             className="text-muted-foreground mb-8 leading-relaxed"
           >
-            Congratulations! Your application has been received and is now in our review queue. As an early applicant,
-            you'll have priority visibility when we launch. We'll contact you once our platform goes live with next
-            steps for profile completion and verification.
+            We’ve received your details and will reach out.
           </motion.p>
 
           <motion.div
@@ -287,8 +282,7 @@ export default function StudentPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl text-muted-foreground leading-relaxed mb-8"
           >
-            We're building the future of education funding. Get early access and priority visibility to donors worldwide
-            through our blockchain-powered platform.
+            Medici is currently curating verified student profiles and preparing for launch. If you're enrolled or planning to enroll in a US university and need support with tuition, submit your details. We'll reach out and invite you to create your full profile for donors to choose from and fund.
           </motion.p>
 
           {/* Development Status Banner */}
@@ -299,11 +293,10 @@ export default function StudentPage() {
             className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-2xl p-6 mb-12"
           >
             <div className="flex items-center justify-center space-x-3 mb-3">
-              <Clock className="h-6 w-6 text-blue-600" />
-              <span className="font-semibold text-lg">Platform in Development</span>
+              <span className="font-semibold text-lg"></span>
             </div>
             <p className="text-muted-foreground">
-              Join our early access program to secure priority placement when we launch
+              During launch, the default view for donors will show student profiles in order of submission date. Submitting early may increase your chances of being seen and funded first. 
             </p>
           </motion.div>
         </motion.div>
@@ -365,8 +358,8 @@ export default function StudentPage() {
               <Card className="backdrop-blur-xl bg-card/80 border-border/50 shadow-2xl">
                 <CardContent className="p-8">
                   <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold mb-3">Student Application</h2>
-                    <p className="text-muted-foreground">Secure your spot in our early access program</p>
+                    <h2 className="text-3xl font-bold mb-3">Get Started</h2>
+                    <p className="text-muted-foreground">Submit your details to be invited to create a verified student profile</p>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-6">
@@ -571,7 +564,7 @@ export default function StudentPage() {
                             className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
                           />
                         ) : (
-                          "Submit Application"
+                          "Request Invite"
                         )}
                       </Button>
                     </motion.div>
