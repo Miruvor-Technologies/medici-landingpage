@@ -27,6 +27,28 @@ export const metadata: Metadata = {
   authors: [{ name: "Medici" }],
   creator: "Medici",
   publisher: "Medici",
+  icons: {
+    icon: [
+      { 
+        url: "/favicon2.svg",
+        media: "(prefers-color-scheme: light)"
+      },
+      {
+        url: "/favicon2.svg",
+        media: "(prefers-color-scheme: dark)"
+      }
+    ],
+    shortcut: ["/favicon2.svg"],
+    apple: [
+      { url: "/favicon2.svg" }
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/favicon2.svg",
+      },
+    ],
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -36,7 +58,7 @@ export const metadata: Metadata = {
     siteName: "Medici",
     images: [
       {
-        url: "/og-image.png", // Make sure to add this image to your public folder
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Medici - Fund a Student's Future"

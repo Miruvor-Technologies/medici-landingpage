@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowLeft, Users } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { Layout } from "@/components/layout"
 import type React from "react"
@@ -16,16 +16,7 @@ export default function AboutPage() {
             Back to Home
           </Link>
 
-          <div className="text-center pt-16">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
-              className="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl"
-            >
-              <Users className="h-12 w-12 text-white" />
-            </motion.div>
-
+          <div className="text-center pt-8">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
