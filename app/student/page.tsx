@@ -57,6 +57,7 @@ export default function StudentPage() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isSearching, setIsSearching] = useState(false)
+  const [userSelectedUniversity, setUserSelectedUniversity] = useState(false)
 
   const debouncedUniversitySearch = useDebounce(formData.university, 300)
   const universityInputRef = useRef<HTMLInputElement>(null)
@@ -70,15 +71,17 @@ export default function StudentPage() {
 
   useEffect(() => {
     const searchUniversities = async () => {
-      if (debouncedUniversitySearch.length < 3) {
+      if (debouncedUniversitySearch.length < 3 || userSelectedUniversity) {
         setUniversities([])
         setIsSearching(false)
         setApiTimeout(false)
+        setShowUniversities(false)
         return
       }
 
       setIsSearching(true)
       setApiTimeout(false)
+      setShowUniversities(true)
 
       // Create a timeout promise
       const timeoutPromise = new Promise((_, reject) => {
@@ -94,22 +97,26 @@ export default function StudentPage() {
         const response = await Promise.race([fetchPromise, timeoutPromise]) as Response
         if (!response.ok) throw new Error('Failed to fetch universities')
         const data = await response.json()
-        setUniversities(data)
-        setShowUniversities(true)
-        if (data.length === 0) {
-          setApiTimeout(true) // Show manual input option if no results
+        if (!userSelectedUniversity) {
+          setUniversities(data)
+          setShowUniversities(true)
+          if (data.length === 0) {
+            setApiTimeout(true) // Show manual input option if no results
+          }
         }
       } catch (error) {
         console.error('Error searching universities:', error)
-        setUniversities([])
-        setApiTimeout(true) // Show manual input option on error
+        if (!userSelectedUniversity) {
+          setUniversities([])
+          setApiTimeout(true) // Show manual input option on error
+        }
       } finally {
         setIsSearching(false)
       }
     }
 
     searchUniversities()
-  }, [debouncedUniversitySearch])
+  }, [debouncedUniversitySearch, userSelectedUniversity])
 
   const handleUniversitySelect = (university: University) => {
     setFormData(prev => ({
@@ -117,9 +124,20 @@ export default function StudentPage() {
       university: university.name,
       isManualUniversity: false
     }))
+    setUserSelectedUniversity(true)
     setShowUniversities(false)
     setUniversities([])
     setApiTimeout(false)
+  }
+
+  const handleUniversityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      university: value
+    }))
+    setUserSelectedUniversity(false)
+    setShowUniversities(true)
   }
 
   const handleManualUniversityInput = () => {
@@ -417,7 +435,7 @@ export default function StudentPage() {
                           id="university"
                           name="university"
                           value={formData.university}
-                          onChange={handleChange}
+                          onChange={handleUniversityChange}
                           placeholder="Search for your university..."
                           className="w-full h-12 mt-2"
                           autoComplete="off"

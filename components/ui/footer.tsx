@@ -52,7 +52,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="https://twitter.com/medici"
+                  href="https://x.com/Medici_ac"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center"
@@ -63,7 +63,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:hello@medici.so"
+                  href="mailto:rd@stableresearch.xyz"
                   className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center"
                 >
                   <Mail className="h-4 w-4 mr-2" />
